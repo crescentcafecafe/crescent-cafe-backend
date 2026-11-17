@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Crescent Cafe Backend
 
 Production-oriented backend for the **Customer**, **Admin** and **Rider** Android apps and the **QR ordering website**.
@@ -67,3 +68,7 @@ Dockerfile, docker-compose.yml, render.yaml, .github/workflows/ci.yml, .env.exam
 * Razorpay, Cashfree, Firebase, Google and Supabase Storage are tested **with fakes** (plus real signature/parsing code). Run sandbox checks before go-live (docs/SETUP.md, docs/UPGRADES.md §A).
 * Docker/Render files were written but not built in the authoring environment; CI builds the image.
 * The default tax rate is **0 %** until the owner sets it; the Admin dashboard warns until configured.
+=======
+# crescent-cafe-backend
+Crescent Cafe FastAPI backend and payment integration
+>>>>>>> c9bcaa069a45d3d8449d43629e1972444cabe660
