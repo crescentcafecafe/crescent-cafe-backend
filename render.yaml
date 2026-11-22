@@ -1,0 +1,41 @@
+# Render Blueprint. Create via Dashboard -> New -> Blueprint -> pick this GitHub repo.
+# Database = Supabase (external). All secrets are set in the Render dashboard (sync: false) and never committed.
+services:
+  - type: web
+    name: crescent-cafe-api
+    runtime: docker
+    plan: free              # FREE plan sleeps after ~15 min idle: fine for testing, NOT for real cafe operation (see docs/DEPLOYMENT.md). Use "starter" for production.
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - { key: ENVIRONMENT, value: production }
+      - { key: LOG_JSON, value: "true" }
+      - { key: STORAGE_BACKEND, value: supabase }
+      - { key: DB_USE_PGBOUNCER, value: "true" }
+      - { key: DB_SSL_REQUIRE, value: "true" }
+      - { key: EMBEDDED_WORKER, value: "true" }
+      - { key: RUN_MIGRATIONS, value: "true" }
+      - { key: SUPABASE_STORAGE_BUCKET, value: menu-images }
+      - { key: CASHFREE_ENV, value: sandbox }
+      - { key: JWT_SECRET, generateValue: true }
+      - { key: DATABASE_URL, sync: false }
+      - { key: PUBLIC_BASE_URL, sync: false }
+      - { key: QR_SITE_URL, sync: false }
+      - { key: FRONTEND_URL, sync: false }
+      - { key: CORS_ORIGINS, sync: false }
+      - { key: SUPABASE_URL, sync: false }
+      - { key: SUPABASE_SERVICE_ROLE_KEY, sync: false }
+      - { key: FIREBASE_CREDENTIALS_JSON, sync: false }
+      - { key: GOOGLE_CLIENT_IDS, sync: false }
+      - { key: RAZORPAY_KEY_ID, sync: false }
+      - { key: RAZORPAY_KEY_SECRET, sync: false }
+      - { key: RAZORPAY_WEBHOOK_SECRET, sync: false }
+      - { key: CASHFREE_CLIENT_ID, sync: false }
+      - { key: CASHFREE_CLIENT_SECRET, sync: false }
+      - { key: CASHFREE_RETURN_URL, sync: false }
+      - { key: RESEND_API_KEY, sync: false }
+      - { key: EMAIL_FROM, sync: false }
+      - { key: TRUSTED_PROXY_COUNT, value: "1" }
+      - { key: DIAGNOSTICS_TOKEN, sync: false }
+      # Optional shared Redis for multiple instances: add a Render Key Value service and set REDIS_URL
+      - { key: REDIS_URL, sync: false }
